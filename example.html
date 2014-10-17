@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Swipe Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="swipe.js"></script>
+  </head>
+  <body>
+    <div id="swipeBox1" style="width: 80%; height: 150px; background-color: #ff0;">Swipe me with 1 finger.</div>
+    <div id="swipeBox2" style="width: 80%; height: 150px; background-color: #f00;">Swipe me with 2 fingers.</div>
+    <div id="swipeBox3" style="width: 80%; height: 150px; background-color: #00f;">Swipe me with any number of fingers.</div>
+  </body>
+  <script>
+    function swipeCallback(id, direction, fingerCount) {
+      alert('element with id "' + id + '" was just swiped ' + direction + ' with ' + fingerCount + ' finger(s).');
+    }
+
+    attachSwipe('swipeBox1', 1, swipeCallback);
+    attachSwipe('swipeBox2', 2, swipeCallback);
+    attachSwipe('swipeBox3', null, swipeCallback);
+  </script>
+</html>
