@@ -14,13 +14,16 @@ var swipeData = {};
  * @param string id
  *   The ID of the element to attach too.
  * @param int fingerCount
- *   The number of fingers to track for this particular event.
- *   Use null to disable tracking of count.
+ *   The number of fingers to track for this particular event. Use null to
+ *   disable tracking of count.
  * @param function callback
- *   Callback function when a swipe event takes place on the element.
- *   Arguments for the callback function are: id (string), and direction (string).
+ *   Callback function when a swipe event takes place on the element. Arguments
+ *   for the callback function are: id (string), and direction (string).
+ * @param bool preventDefault
+ *   Set whether or not the default behaviour of the touch events should pass
+ *   through to event handling.
  */
-function attachSwipe(id, fingerCount, callback) {
+function attachSwipe(id, fingerCount, callback, preventDefault) {
   var element = document.getElementById(id);
 
   if (element && typeof callback == 'function') {
@@ -33,7 +36,8 @@ function attachSwipe(id, fingerCount, callback) {
       swipeLength: 0,
       minimumSwipeLength: 72,
       fingerCount: 0,
-      trackFingerCount: fingerCount
+      trackFingerCount: fingerCount,
+      preventDefault: preventDefault
     };
 
     element.setAttribute('ontouchstart', 'touchStart(event, id);');
@@ -51,7 +55,8 @@ function attachSwipe(id, fingerCount, callback) {
  *   The ID of the element to track.
  */
 function touchStart(event, id) {
-  event.preventDefault();
+  if (swipeData[id].preventDefault)
+    event.preventDefault();
 
   swipeData[id].fingerCount = event.touches.length;
 
@@ -77,7 +82,8 @@ function touchStart(event, id) {
  *   The ID of the element to track.
  */
 function touchEnd(event, id) {
-  event.preventDefault();
+  if (swipeData[id].preventDefault)
+    event.preventDefault();
 
   var trackEvent = (swipeData[id].trackFingerCount === null ?
     true :
@@ -120,7 +126,8 @@ function touchEnd(event, id) {
  *   The ID of the element to track.
  */
 function touchMove(event, id) {
-  event.preventDefault();
+  if (swipeData[id].preventDefault)
+    event.preventDefault();
 
   var trackEvent = (swipeData[id].trackFingerCount === null ?
     true :
