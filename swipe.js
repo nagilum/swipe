@@ -47,24 +47,29 @@ var swipeData = {};
 function attachSwipe(id, fingerCount, callback, preventDefault) {
   var element = document.getElementById(id);
 
-  if (element && typeof callback == 'function') {
-    swipeData[id] = {
-      callback: callback,
-      startX: 0,
-      startY: 0,
-      currentX: 0,
-      currentY: 0,
-      swipeLength: 0,
-      minimumSwipeLength: 72,
-      fingerCount: 0,
-      trackFingerCount: fingerCount,
-      preventDefault: preventDefault
-    };
+  if (element === null ||
+      typeof element === 'undefined')
+    throw 'Element with ID: "' + id + '" not found!';
 
-    element.setAttribute('ontouchstart', 'touchStart(event, id);');
-    element.setAttribute('ontouchend',   'touchEnd(event, id);');
-    element.setAttribute('ontouchmove',  'touchMove(event, id);');
-  }
+  if (typeof callback !== 'function')
+    throw 'The callback argument must be a function!';
+
+  swipeData[id] = {
+    callback: callback,
+    startX: 0,
+    startY: 0,
+    currentX: 0,
+    currentY: 0,
+    swipeLength: 0,
+    minimumSwipeLength: 72,
+    fingerCount: 0,
+    trackFingerCount: fingerCount,
+    preventDefault: preventDefault
+  };
+
+  element.setAttribute('ontouchstart', 'touchStart(event, id);');
+  element.setAttribute('ontouchend',   'touchEnd(event, id);');
+  element.setAttribute('ontouchmove',  'touchMove(event, id);');
 }
 
 /**
