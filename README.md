@@ -10,9 +10,20 @@ In the HTML header:
 ```html
 <script src="swipe.js"></script>
 <script>
-    function swipeCompleted(id, direction, fingerCount) {
-        alert('Element with ID: ' + id + ' was just swiped ' + direction + ' with ' + fingerCount + ' finger(s).');
-    }
+	/**
+	 * This is the callback function the swipe library will init when the swipe
+	 * event is completed.
+	 *
+	 * @param string id
+	 *   The ID of the element that was swiped.
+	 * @param string direction
+	 *   The direction of the swipe, ie 'left', 'right', 'up', or 'down'.
+	 * @param int fingerCount
+	 *   The number of fingers used for the swipe.
+	 */
+  function swipeCompleted(id, direction, fingerCount) {
+    alert('Element with ID: ' + id + ' was just swiped ' + direction + ' with ' + fingerCount + ' finger(s).');
+  }
 </script>
 ```
 
