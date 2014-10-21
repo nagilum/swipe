@@ -2,6 +2,9 @@
  * @file
  * Enable pure swipe functionality attached to elements by ID.
  *
+ * @author
+ * Stian Hanger (pdnagilum@gmail.com)
+ *
  * @usage
  * It's pretty simple to set up and use. You need a callback function which
  * will be called when the swipe is completed and you need an element to attach
@@ -33,9 +36,6 @@
  * which is calculated from the angle.
  * FingerCount is the number of fingers used for the swipe.
  * Element is the element where the swipe originated.
- *
- * @author
- * Stian Hanger (pdnagilum@gmail.com)
  */
 
 /**
