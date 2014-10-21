@@ -1,7 +1,8 @@
-# Swipe with Pure Javascript
+# Swipe
 
-Here is a simple library to enable swipe on a mobile webpage.
-It can track multiple elements and multiple finger touches.
+Here is a simple library to enable swipe on webpages without the use of
+additional libraries like jQuery. It can track multiple elements and multiple
+finger touches.
 
 ## Usage
 
