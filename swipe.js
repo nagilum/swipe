@@ -1,6 +1,27 @@
 /**
  * @file
- * Enable pure swipe functionality attached to elements.
+ * Enable pure swipe functionality attached to elements by ID.
+ *
+ * @usage
+ * It's pretty simple to set up and use. You need a callback function which
+ * will be called when the swipe is completed and you need an element to attach
+ * the swipe too.
+ *
+ * You attach the swipe using this function:
+ * attachSwipe(
+ *   'id-of-element',
+ *   number-of-fingers-to-track,
+ *   callback-function-name,
+ *   prevent-default-click/touch-behaviour);
+ *
+ * So a normal call would look something like this:
+ * attachSwipe('mySwipeBox', 1, myCallback, false);
+ *
+ * Next you'll need the callback function for the swipe completed event. This
+ * function takes 3 parameters, id, direction, and fingerCount. ID is of course
+ * the ID of the element that was swiped on. The direction is the direction of
+ * the swipe ('left', 'right', 'up', or 'down'), and finally the fingerCount is
+ * the number of fingers used for the swipe.
  *
  * @author
  * Stian Hanger (pdnagilum@gmail.com)
