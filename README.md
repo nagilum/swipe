@@ -31,13 +31,20 @@ In the HTML footer:
 
 ```html
 <script>
-    // attachSwipe('id-of-element', number-of-fingers, callback-function);
-    // The callback function is a function you create which will be called when the swipe is completed.
+  // attachSwipe(
+  //   'id-of-element',
+  //   number-of-fingers,
+  //   callback-function,
+  //   prevent-default-click/touch-events);
+  //
+  // The callback function is a function you create which will be called when
+  // the swipe is completed The last argument isn't required and defaults to
+  // false if not set.
 
-    // Example:
-    attachSwipe('divBoxForSwipe', 1, swipeCompleted);
+  // Example:
+  attachSwipe('divBoxForSwipe', 1, swipeCompleted);
 
-    // If you don't want to limit the number of fingers to track, aka can use any number of fingers to swipe, use this:
-    attachSwipe('divBoxForSwipe', null, swipeCompleted);
+  // If you don't want to limit the number of fingers to track, aka can use any number of fingers to swipe, use this:
+  attachSwipe('divBoxForSwipe', null, swipeCompleted);
 </script>
 ```
