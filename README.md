@@ -21,12 +21,18 @@ Then you'll need a callback function for when a swipe is completed:
  *
  * @param string id
  *   The ID of the element that was swiped.
+ * @param int angle
+ *   The overall angle of the swipe.
+ * @param int length
+ *   The overall length of the swipe.
  * @param string direction
  *   The direction of the swipe, ie 'left', 'right', 'up', or 'down'.
  * @param int fingerCount
  *   The number of fingers used for the swipe.
+ * @param element element
+ *   The element where the swipe originated.
  */
-function swipeCompleted(id, direction, fingerCount) {
+function swipeCompleted(id, angle, length, direction, fingerCount, element) {
   alert('Element with ID: ' + id + ' was just swiped ' + direction + ' with ' + fingerCount + ' finger(s).');
 }
 ```

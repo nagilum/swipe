@@ -18,15 +18,30 @@
  * attachSwipe('mySwipeBox', 1, myCallback, false);
  *
  * Next you'll need the callback function for the swipe completed event. This
- * function takes 3 parameters, id, direction, and fingerCount. ID is of course
- * the ID of the element that was swiped on. The direction is the direction of
- * the swipe ('left', 'right', 'up', or 'down'), and finally the fingerCount is
- * the number of fingers used for the swipe.
+ * function takes 6 parameters:
+ *   id (string),
+ *   angle (int),
+ *   length (int),
+ *   direction (string),
+ *   fingerCount (int), and
+ *   element (element).
+ *
+ * ID is of course the ID of the element that was swiped on.
+ * Angle is the overall degree angle of the swipe.
+ * Length is the overall length of the swipe.
+ * Direction is the direction of the swipe ('left', 'right', 'up', or 'down')
+ * which is calculated from the angle.
+ * FingerCount is the number of fingers used for the swipe.
+ * Element is the element where the swipe originated.
  *
  * @author
  * Stian Hanger (pdnagilum@gmail.com)
  */
 
+/**
+ * @var
+ * Array of elements to track swipe events for.
+ */
 var swipeData = {};
 
 /**
@@ -49,7 +64,7 @@ function attachSwipe(id, fingerCount, callback, preventDefault) {
 
   if (element === null ||
       typeof element === 'undefined')
-    throw 'Element with ID: "' + id + '" not found!';
+    throw 'Element with ID "' + id + '" could not be found!';
 
   if (typeof callback !== 'function')
     throw 'The callback argument must be a function!';
@@ -64,12 +79,15 @@ function attachSwipe(id, fingerCount, callback, preventDefault) {
     minimumSwipeLength: 72,
     fingerCount: 0,
     trackFingerCount: fingerCount,
-    preventDefault: preventDefault
+    preventDefault: preventDefault,
+    attached: false
   };
 
   element.setAttribute('ontouchstart', 'touchStart(event, id);');
   element.setAttribute('ontouchend',   'touchEnd(event, id);');
   element.setAttribute('ontouchmove',  'touchMove(event, id);');
+
+  swipeData[id].attached = true;
 }
 
 /**
@@ -136,7 +154,7 @@ function touchEnd(event, id) {
       else { direction = 'up'; }
 
       if (swipeData[id].fingerCount > 0)
-        swipeData[id].callback(id, direction, swipeData[id].fingerCount);
+        swipeData[id].callback(id, angle, length, direction, swipeData[id].fingerCount, event.srcElement);
     }
   }
 
