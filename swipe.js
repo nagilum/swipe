@@ -154,7 +154,7 @@ function touchEnd(event, id) {
       else { direction = 'up'; }
 
       if (swipeData[id].fingerCount > 0)
-        swipeData[id].callback(id, angle, length, direction, swipeData[id].fingerCount, event.srcElement);
+        swipeData[id].callback(id, angle, swipeData[id].swipeLength, direction, swipeData[id].fingerCount, event.srcElement);
     }
   }
 
