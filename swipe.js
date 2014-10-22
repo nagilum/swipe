@@ -138,23 +138,34 @@ function touchEnd(event, id) {
     swipeData[id].swipeLength = Math.round(Math.sqrt(Math.pow(swipeData[id].currentX - swipeData[id].startX, 2) + Math.pow(swipeData[id].currentY - swipeData[id].startY, 2)));
 
     if (swipeData[id].swipeLength >= swipeData[id].minimumSwipeLength) {
-      var x         = swipeData[id].startX - swipeData[id].currentX,
-          y         = swipeData[id].currentY - swipeData[id].startY,
-          r         = Math.atan2(y, x),
-          angle     = Math.round(r * 180 / Math.PI),
-          direction = '';
+      var x              = swipeData[id].startX - swipeData[id].currentX,
+          y              = swipeData[id].currentY - swipeData[id].startY,
+          r              = Math.atan2(y, x),
+          angle          = Math.round(r * 180 / Math.PI),
+          direction4axis = '',
+          direction8axis = '';
 
       if (angle < 0)
         angle = 360 - Math.abs(angle);
 
-      if (angle <= 45 && angle >= 0) { direction = 'left'; }
-      else if (angle <= 360 && angle >= 315) { direction = 'left'; }
-      else if (angle >= 135 && angle <= 255) { direction = 'right'; }
-      else if (angle > 45 && angle < 135) { direction = 'down'; }
-      else { direction = 'up'; }
+      if      (                angle < 45 ) { direction4axis = 'w';  }
+      else if (angle >= 45  && angle < 135) { direction4axis = 's';  }
+      else if (angle >= 135 && angle < 255) { direction4axis = 'e'; }
+      else if (angle >= 255 && angle < 315) { direction4axis = 'n';    }
+      else if (angle >= 315               ) { direction4axis = 'w';  }
+
+      if      (                angle < 23 ) { direction8axis = 'w';  }
+      else if (angle >= 23  && angle < 67 ) { direction8axis = 'sw'; }
+      else if (angle >= 67  && angle < 113) { direction8axis = 's';  }
+      else if (angle >= 113 && angle < 157) { direction8axis = 'se'; }
+      else if (angle >= 157 && angle < 203) { direction8axis = 'e';  }
+      else if (angle >= 203 && angle < 247) { direction8axis = 'ne'; }
+      else if (angle >= 247 && angle < 293) { direction8axis = 'n';  }
+      else if (angle >= 293 && angle < 337) { direction8axis = 'nw'; }
+      else if (angle >= 337               ) { direction8axis = 'w';  }
 
       if (swipeData[id].fingerCount > 0)
-        swipeData[id].callback(id, angle, swipeData[id].swipeLength, direction, swipeData[id].fingerCount, event.srcElement);
+        swipeData[id].callback(id, angle, swipeData[id].swipeLength, direction4axis, direction8axis, swipeData[id].fingerCount, event.srcElement);
     }
   }
 

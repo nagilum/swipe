@@ -1,8 +1,8 @@
 # Swipe
 
-Simple library to enable swipe on webpages without the use of additional
-libraries like jQuery. It can track multiple elements and multiple finger
-touches.
+Simple Javascript library to enable swipe on webpages without the use of
+additional libraries like jQuery. It can track multiple elements and multiple
+finger touches.
 
 ## Usage
 
@@ -25,14 +25,16 @@ Then you'll need a callback function for when a swipe is completed:
  *   The overall angle of the swipe.
  * @param int length
  *   The overall length of the swipe.
- * @param string direction
- *   The direction of the swipe, ie 'left', 'right', 'up', or 'down'.
+ * @param string direction4axis
+ *   The direction of the swipe, ie 'w', 'e', 'n', or 's'.
+ * @param string direction8axis
+ *   A more detailed direction, ie: 'w', 'sw', 's', 'se', 'e', 'ne', 'n', or 'nw'.
  * @param int fingerCount
  *   The number of fingers used for the swipe.
  * @param element element
  *   The element where the swipe originated.
  */
-function swipeCompleted(id, angle, length, direction, fingerCount, element) {
+function swipeCompleted(id, angle, length, direction4axis, direction8axis, fingerCount, element) {
   alert('Element with ID: ' + id + ' was just swiped ' + direction + ' with ' + fingerCount + ' finger(s).');
 }
 ```
@@ -55,4 +57,11 @@ attachSwipe('divBoxForSwipe', 1, swipeCompleted);
 
 // If you don't want to limit the number of fingers to track, aka can use any number of fingers to swipe, use this:
 attachSwipe('divBoxForSwipe', null, swipeCompleted);
+```
+
+You can also supress default behaviour of the underlying controls by adding a fourth argument.
+
+```js
+// Now other click/touch events on the element won't trigger.
+attachSwipe('mySwipeBox', 2, swipeCompleted, true);
 ```
