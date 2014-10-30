@@ -46,7 +46,8 @@ And finally you just call forth and attach the swipe to an element, as such:
 //   'id-of-element',
 //   number-of-fingers,
 //   callback-function,
-//   prevent-default-click/touch-events);
+//   prevent-default-click/touch-events,
+//   minimum-swipe-length);
 //
 // The callback function is a function you create which will be called when
 // the swipe is completed The last argument isn't required and defaults to
