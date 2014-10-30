@@ -58,8 +58,11 @@ var swipeData = {};
  * @param bool preventDefault
  *   Set whether or not the default behaviour of the touch events should pass
  *   through to event handling.
+ * @param int minimumSwipeLength
+ *   The minimum length before a swipe is recognized. Defaults to 72. Lower
+ *   this to make detection more precise.
  */
-function attachSwipe(id, fingerCount, callback, preventDefault) {
+function attachSwipe(id, fingerCount, callback, preventDefault, minimumSwipeLength) {
   var element = document.getElementById(id);
 
   if (element === null ||
@@ -69,6 +72,9 @@ function attachSwipe(id, fingerCount, callback, preventDefault) {
   if (typeof callback !== 'function')
     throw 'The callback argument must be a function!';
 
+  if (isNaN(minimumSwipeLength))
+    minimumSwipeLength = 72;
+
   swipeData[id] = {
     callback: callback,
     startX: 0,
@@ -76,7 +82,7 @@ function attachSwipe(id, fingerCount, callback, preventDefault) {
     currentX: 0,
     currentY: 0,
     swipeLength: 0,
-    minimumSwipeLength: 72,
+    minimumSwipeLength: minimumSwipeLength,
     fingerCount: 0,
     trackFingerCount: fingerCount,
     preventDefault: preventDefault,
